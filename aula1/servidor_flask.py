@@ -6,4 +6,4 @@ app = Flask(__name__)
 def home():
     return "Servidor rodando com Flask!"
 
-app.run(debug=False)
+app.run(debug=True)

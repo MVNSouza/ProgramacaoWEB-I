@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h2>Escolha o tipo de autenticação</h2>
+
+    <a href="{{ url_for('login_session_page') }}">
+        <button>Login por Sessão</button>
+    </a>
+    <br><br>
+
+    <a href="{{ url_for('login_jwt_page') }}">
+        <button>Login por JWT</button>
+    </a>
+    <br><br>
+
+    <a href="{{ url_for('login_basic') }}">
+        <button>Login com Basic Auth</button>
+    </a>
+    <br><br>
+    <a href="{{ url_for('index') }}">Voltar</a>
+</body>
+</html>

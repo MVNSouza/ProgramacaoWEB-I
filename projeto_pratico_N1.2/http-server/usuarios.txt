@@ -1,0 +1,5 @@
+1|Alice Maria|alice@exemplo.com|88996711992
+2|Reginaldo|reginaldo@exemplo.com|88996722991
+3|Mateus Ribeiro Ferreira|mateus999391343@gmail.com|88996256843
+4|Marcos|marcos@exemplo.com|88997243568
+5|Julio Serafim|julio2@exemplo.com|88995634342

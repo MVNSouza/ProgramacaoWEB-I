@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>JWT com Flask</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    textarea { width: 100%; height: 100px; }
+    button { margin-top: 10px; }
+    .result { background: #f0f0f0; padding: 10px; margin-top: 10px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h2>🔐 Gerar Token JWT</h2>
+  <button onclick="gerarToken()">Gerar</button>
+  <div class="result" id="resultado-token"></div>
+
+  <h2>✅ Verificar Token JWT</h2>
+  <textarea id="campo-token" placeholder="Cole aqui o token gerado..."></textarea>
+  <button onclick="verificarToken()">Verificar</button>
+  <div class="result" id="resultado-verificacao"></div>
+
+  <script>
+    function gerarToken() {
+      fetch('/gerar-token')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('resultado-token').textContent = data.token;
+          document.getElementById('campo-token').value = data.token;
+        })
+        .catch(err => alert("Erro ao gerar token: " + err));
+    }
+
+    function verificarToken() {
+      const token = document.getElementById('campo-token').value;
+      fetch('/verificar-token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('resultado-verificacao').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => alert("Erro ao verificar token: " + err));
+    }
+  </script>
+</body>
+</html>

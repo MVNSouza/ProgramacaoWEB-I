@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Admin - Usuários</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <h2>Criar novo usuário</h2>
+    <form method="POST" action="{{ url_for('admin_users_route') }}">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Senha" required>
+        <select name="role">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Usuários cadastrados</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Ações</th>
+        </tr>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.username }}</td>
+            <td>{{ u.role }}</td>
+            <td>
+                {% if u.username != current_user.username %}
+                <form method="POST" action="{{ url_for('delete_user_route', username=u.username) }}" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Deseja realmente excluir {{ u.username }}?');">Excluir</button>
+                </form>
+                {% else %}
+                    (Você)
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="logout">
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>
