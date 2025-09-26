@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo PATCH</title>
+</head>
+<body>
+  <h2>Formulário: Verbo PATCH</h2>
+  <form id="formulario">
+    Campo para atualizar: <input type="text" name="campo"><br>
+    Novo valor: <input type="text" name="valor"><br>
+    <button type="submit">Atualizar parcialmente</button>
+  </form>
+
+  <p id="resposta"></p>
+
+  <script>
+    document.getElementById("formulario").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const body = new URLSearchParams(formData);
+
+      const resposta = await fetch("http://localhost:8080", {
+        method: "PATCH",
+        body,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      });
+
+      const texto = await resposta.text();
+      document.getElementById("resposta").innerText = texto;
+    });
+  </script>
+</body>
+</html>
